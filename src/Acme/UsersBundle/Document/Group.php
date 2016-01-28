@@ -4,7 +4,7 @@ namespace Acme\UsersBundle\Document;
 
 class Group
 {
-    /** @ReferenceOne(targetDocument="User") */
+    /** @ReferenceMany(targetDocument="User") */
     private $user;
     
     

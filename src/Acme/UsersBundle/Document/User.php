@@ -5,7 +5,7 @@ namespace Acme\UsersBundle\Document;
 class User
 {
     
-    /** @ReferenceMany(targetDocument="Group") */
+    /** @ReferenceOne(targetDocument="Group") */
     private $groups;
     
     /**
@@ -24,18 +24,6 @@ class User
      * @var MongoId $id
      */
     protected $id;
-    
-    public function __construct()
-    {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-
-    public function setGroup(\Acme\UsersBundle\Document\Group $group)
-    {
-        $this->groups[] = $group;
-        return $this;
-    }
     
     
     /**
