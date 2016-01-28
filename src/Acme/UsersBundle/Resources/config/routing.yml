@@ -1,3 +1,9 @@
 acme_users_homepage:
     path:     /
     defaults: { _controller: AcmeUsersBundle:Default:index }
+acme_users_create:
+    path:     /acme/users/create
+    defaults: { _controller: AcmeUsersBundle:Default:create }
+acme_users_group:
+    path:     /acme/users/group
+    defaults: { _controller: AcmeUsersBundle:Default:group }

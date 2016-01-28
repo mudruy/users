@@ -8,3 +8,7 @@ symfony new users 2.8
 php composer.phar update doctrine/mongodb-odm doctrine/mongodb-odm-bundle
 
 #db.createUser({user: "user",pwd: "password",roles:[{ role: "readWrite", db: "users" }]})
+
+	
+
+php app/console doctrine:mongodb:generate:documents AcmeStoreBundle
