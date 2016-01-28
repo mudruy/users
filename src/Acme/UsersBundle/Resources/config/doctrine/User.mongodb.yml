@@ -1,0 +1,10 @@
+Acme\UsersBundle\Document\User:
+    fields:
+        id:
+            id:  true
+        name:
+            type: string
+        password:
+            type: string
+        role:
+            type: string
