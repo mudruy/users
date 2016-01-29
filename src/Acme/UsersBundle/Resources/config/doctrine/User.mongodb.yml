@@ -7,3 +7,15 @@ Acme\UsersBundle\Document\User:
             type: string
         password:
             type: string
+    properties:
+        name:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+    type: document
+    referenceMany:
+        groups:
+          targetDocument: \Acme\UsersBundle\Document\Group
+    

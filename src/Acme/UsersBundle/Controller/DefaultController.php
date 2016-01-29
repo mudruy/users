@@ -22,7 +22,7 @@ class DefaultController extends Controller
             ->getDefaultGroup();
         
         $user = new User();
-        $user->setName('user1');
+        $user->setName('');
         $user->setPassword('19.99');
         $user->setGroup($group);
 
@@ -37,7 +37,7 @@ class DefaultController extends Controller
 //    {
 //        
 //        $group = new Group();
-//        $group->setRole('guest');
+//        $group->setRole('admin');
 //
 //        $dm = $this->get('doctrine.odm.mongodb.document_manager');
 //        $dm->persist($group);

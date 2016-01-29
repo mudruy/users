@@ -5,25 +5,31 @@ namespace Acme\UsersBundle\Document;
 class User
 {
     
-    /** @ReferenceOne(targetDocument="Group") */
-    private $groups;
-    
-    /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     */
     protected $name;
 
-    /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     */
     protected $password;
     
     /**
      * @var MongoId $id
      */
     protected $id;
+    
+    
+    
+    
+    /**
+     * Set group
+     *
+     * @param \Acme\UsersBundle\Document\Group $group
+     * @return User
+     */
+    public function setGroup(\Acme\UsersBundle\Document\Group $group)
+    {
+        if(!$this->groups->contains($group)){
+            $this->groups->add($group);
+        }
+        return $this;
+    }
     
     
     /**
@@ -69,7 +75,7 @@ class User
         $this->password = $password;
         return $this;
     }
-    
+
     /**
      * Get password
      *
@@ -80,4 +86,43 @@ class User
         return $this->password;
     }
 
+    /**
+     * @var Documents\Group
+     */
+    protected $groups = array();
+
+    public function __construct()
+    {
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add group
+     *
+     * @param Documents\Group $group
+     */
+    public function addGroup(\Documents\Group $group)
+    {
+        $this->groups[] = $group;
+    }
+
+    /**
+     * Remove group
+     *
+     * @param Documents\Group $group
+     */
+    public function removeGroup(\Documents\Group $group)
+    {
+        $this->groups->removeElement($group);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection $groups
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
 }

@@ -21,7 +21,7 @@ class GroupRepository extends DocumentRepository
         return $this->createQueryBuilder()
             ->field('role')->equals('guest')
             ->getQuery()
-            ->execute();
+            ->getSingleResult();
     }
     
     

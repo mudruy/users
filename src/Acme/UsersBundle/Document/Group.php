@@ -4,14 +4,8 @@ namespace Acme\UsersBundle\Document;
 
 class Group
 {
-    /** @ReferenceMany(targetDocument="User") */
-    private $user;
     
     
-    /**
-     * @MongoDB\Field(type="string")
-     * @Assert\NotBlank()
-     */
     protected $role;
 
     /**
@@ -19,7 +13,7 @@ class Group
      */
     protected $id;
 
-
+    
     /**
      * Get id
      *
