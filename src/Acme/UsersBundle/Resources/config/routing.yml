@@ -4,6 +4,6 @@ acme_users_homepage:
 acme_users_create:
     path:     /acme/users/create
     defaults: { _controller: AcmeUsersBundle:Default:create }
-acme_users_group:
-    path:     /acme/users/group
-    defaults: { _controller: AcmeUsersBundle:Default:group }
+acme_users_register:
+    path:     /acme/users/register
+    defaults: { _controller: AcmeUsersBundle:Default:register }
