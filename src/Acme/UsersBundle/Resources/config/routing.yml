@@ -10,3 +10,6 @@ acme_users_register:
 acme_users_create2:
     path:     /acme/users/create2
     defaults: { _controller: AcmeUsersBundle:Default:create2 }
+acme_users_show:
+    path:     /acme/users/show
+    defaults: { _controller: AcmeUsersBundle:Default:show }

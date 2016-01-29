@@ -1,0 +1,27 @@
+{% extends 'AcmeUsersBundle::index.html.twig' %}
+
+{% block title %}List{% endblock %}
+{% block content %}
+    
+    
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <a href="{{ path('acme_users_create') }}" class="btn btn-primary">Add</a>
+                <hr />
+                <table class="table table-hover">
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td><p>{{ user.name }}</p></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
