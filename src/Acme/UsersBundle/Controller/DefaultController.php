@@ -8,7 +8,9 @@ use Acme\UsersBundle\Document\Group;
 use Symfony\Component\HttpFoundation\Response;
 
 use Acme\UsersBundle\Form\Type\RegistrationType;
+use Acme\UsersBundle\Form\Type\UserType;
 use Acme\UsersBundle\Form\Model\Registration;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class DefaultController extends Controller
 {
@@ -28,7 +30,6 @@ class DefaultController extends Controller
         $user = new User();
         $user->setName('user2');
         $user->setPassword('19.99');
-        $user->setGroup($group);
         
        
 
@@ -48,20 +49,23 @@ class DefaultController extends Controller
     }
     
     public function createAction()
-    {
+    {   
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
 
-        $form = $this->createForm(new RegistrationType(), new Registration());
+        $user = new User();
+        //$form = $this->createForm(new RegistrationType(), new Registration());
+        //but this do not work
+        $form = $this->createForm(new UserType(), $user);
 
-        $form->bindRequest($this->getRequest());
+        $form->handleRequest($this->getRequest());
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $registration = $form->getData();
 
             $dm->persist($registration->getUser());
             $dm->flush();
 
-            return $this->redirect('/acme/users/create');
+            return $this->redirectToRoute('acme_users_register');
         }
 
         return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));

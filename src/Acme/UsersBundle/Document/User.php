@@ -4,10 +4,6 @@ namespace Acme\UsersBundle\Document;
 
 class User
 {
-    /**
-     * @var Documents\Group
-     */
-    protected $groups = array();
     
     protected $name;
 
@@ -17,23 +13,6 @@ class User
      * @var MongoId $id
      */
     protected $id;
-    
-    
-    
-    
-    /**
-     * Set group
-     *
-     * @param \Acme\UsersBundle\Document\Group $group
-     * @return User
-     */
-    public function setGroup(\Acme\UsersBundle\Document\Group $group)
-    {
-        if(!$this->groups->contains($group)){
-            $this->groups->add($group);
-        }
-        return $this;
-    }
     
     
     /**
@@ -89,41 +68,15 @@ class User
     {
         return $this->password;
     }
-
     
 
-    public function __construct()
+    public function getUser()
     {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this;
     }
     
-    /**
-     * Add group
-     *
-     * @param Documents\Group $group
-     */
-    public function addGroup(\Documents\Group $group)
+    public function setUser( $user)
     {
-        $this->groups[] = $group;
     }
 
-    /**
-     * Remove group
-     *
-     * @param Documents\Group $group
-     */
-    public function removeGroup(\Documents\Group $group)
-    {
-        $this->groups->removeElement($group);
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection $groups
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
 }

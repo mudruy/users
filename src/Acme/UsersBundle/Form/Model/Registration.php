@@ -12,7 +12,10 @@ class Registration
      * @Assert\Type(type="Acme\UsersBundle\Document\User")
      */
     protected $user;
-
+    
+    public function __construct($user = null) {
+        $this->user = $user;
+    }
 
     public function setUser(Acme\UsersBundle\Document\User $user)
     {
