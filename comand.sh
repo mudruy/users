@@ -12,3 +12,11 @@ php composer.phar update doctrine/mongodb-odm doctrine/mongodb-odm-bundle
 	
 
 php app/console doctrine:mongodb:generate:documents AcmeStoreBundle
+
+php composer.phar require symfony/assetic-bundle
+
+#assetic:
+#    debug:          '%kernel.debug%'
+#    use_controller: '%kernel.debug%'
+#    filters:
+#        cssrewrite: ~

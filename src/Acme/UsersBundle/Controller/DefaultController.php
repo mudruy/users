@@ -47,7 +47,6 @@ class DefaultController extends Controller
     public function registerAction()
     {
         $form = $this->createForm(new RegistrationType(), new Registration());
-
         return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
     }
     

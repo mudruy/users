@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new Acme\UsersBundle\AcmeUsersBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

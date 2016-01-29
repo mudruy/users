@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+{% block stylesheets %}
+{% javascripts '@AcmeUsersBundle/Resources/public/js/*' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets '@AcmeUsersBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+
+{% endblock %}
+{% block body %}
+    <div class="wrapper">
+        <header class="main-header">
+        <nav class="navbar navbar-static-top">
+        </nav>
+      </header>
+        
+        
+        
+        <div class="content-wrapper" style="min-height: 946px;">
+            {% block content %}
+
+
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}
