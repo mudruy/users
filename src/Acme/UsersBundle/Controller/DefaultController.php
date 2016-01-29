@@ -10,7 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Acme\UsersBundle\Form\Type\RegistrationType;
 use Acme\UsersBundle\Form\Type\UserType;
 use Acme\UsersBundle\Form\Model\Registration;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class DefaultController extends Controller
 {
@@ -53,9 +56,9 @@ class DefaultController extends Controller
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
 
         $user = new User();
+        $form = $this->createForm(new RegistrationType(), $user);
         //$form = $this->createForm(new RegistrationType(), new Registration());
         //but this do not work
-        $form = $this->createForm(new UserType(), $user);
 
         $form->handleRequest($this->getRequest());
 

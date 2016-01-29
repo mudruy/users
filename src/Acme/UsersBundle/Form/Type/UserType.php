@@ -21,9 +21,11 @@ class UserType extends AbstractType
         ));
     }
 
-    public function getDefaultOptions(array $options)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return array('data_class' => 'Acme\UsersBundle\Document\User');
+        $resolver->setDefaults(array(
+            'data_class' => 'Acme\UsersBundle\Document\User',
+        ));
     }
 
     public function getName()

@@ -9,15 +9,22 @@ use Acme\UsersBundle\Document\User;
 class Registration
 {
     /**
-     * @Assert\Type(type="Acme\UsersBundle\Document\User")
+     * @Assert\Type(type="Acme\AccountBundle\Document\User")
      */
     protected $user;
-    
-    public function __construct($user = null) {
-        $this->user = $user;
-    }
 
-    public function setUser(Acme\UsersBundle\Document\User $user)
+    /**
+     * @Assert\NotBlank()
+     * @Assert\True()
+     */
+    protected $termsAccepted;
+    
+    public function __construct()
+	{
+		$this->user = new User();
+	}
+
+    public function setUser( $user)
     {
         $this->user = $user;
     }
@@ -25,6 +32,16 @@ class Registration
     public function getUser()
     {
         return $this->user;
+    }
+
+    public function getTermsAccepted()
+    {
+        return $this->termsAccepted;
+    }
+
+    public function setTermsAccepted($termsAccepted)
+    {
+        $this->termsAccepted = (boolean)$termsAccepted;
     }
 
 }

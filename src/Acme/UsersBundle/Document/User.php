@@ -69,14 +69,16 @@ class User
         return $this->password;
     }
     
+    public function setUser( $user)
+    {
+    }
 
     public function getUser()
     {
         return $this;
     }
     
-    public function setUser( $user)
-    {
-    }
+
+
 
 }
