@@ -40,16 +40,4 @@ class DefaultController extends Controller
         return new Response('Created product id '.$user->getId());
     }
     
-//    public function groupAction()
-//    {
-//        
-//        $group = new Group();
-//        $group->setRole('admin');
-//
-//        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-//        $dm->persist($group);
-//        $dm->flush();
-//
-//        return new Response('Created $group id '.$group->getId());
-//    }
 }
