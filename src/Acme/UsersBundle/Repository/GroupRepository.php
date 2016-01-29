@@ -19,7 +19,7 @@ class GroupRepository extends DocumentRepository
     public function getDefaultGroup()
     {
         return $this->createQueryBuilder()
-            ->field('role')->equals('guest')
+            ->field('role')->equals('admin')
             ->getQuery()
             ->getSingleResult();
     }

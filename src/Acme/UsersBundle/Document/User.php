@@ -4,6 +4,10 @@ namespace Acme\UsersBundle\Document;
 
 class User
 {
+    /**
+     * @var Documents\Group
+     */
+    protected $groups = array();
     
     protected $name;
 
@@ -86,10 +90,7 @@ class User
         return $this->password;
     }
 
-    /**
-     * @var Documents\Group
-     */
-    protected $groups = array();
+    
 
     public function __construct()
     {

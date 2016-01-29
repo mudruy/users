@@ -21,10 +21,17 @@ class DefaultController extends Controller
             ->getRepository('AcmeUsersBundle:Group')
             ->getDefaultGroup();
         
+        $user = $this->get('doctrine_mongodb')
+            ->getManager()
+            ->getRepository('AcmeUsersBundle:User')
+            ->getFirstUser();
+        
         $user = new User();
-        $user->setName('');
+        $user->setName('user1');
         $user->setPassword('19.99');
         $user->setGroup($group);
+        
+       
 
         $dm = $this->get('doctrine.odm.mongodb.document_manager');
         $dm->persist($user);

@@ -23,4 +23,13 @@ class UserRepository extends DocumentRepository
             ->getQuery()
             ->execute();
     }
+    
+    
+    public function getFirstUser()
+    {
+        return $this->createQueryBuilder()
+            ->field('name')->equals('user1')
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
