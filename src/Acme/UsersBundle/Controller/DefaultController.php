@@ -7,6 +7,7 @@ use Acme\UsersBundle\Document\User;
 use Acme\UsersBundle\Document\Group;
 use Symfony\Component\HttpFoundation\Response;
 use Acme\UsersBundle\Form\Type\RegistrationType;
+use Acme\UsersBundle\Form\Type\EditType;
 use Acme\UsersBundle\Form\Type\UserType;
 use Acme\UsersBundle\Form\Model\Registration;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -75,25 +76,26 @@ class DefaultController extends Controller {
     }
     
     public function editAction() {
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
 
-        $user = new User();
-        $form = $this->createForm(new RegistrationType(), $user);
-        //$form = $this->createForm(new RegistrationType(), new Registration());
-        //but this do not work
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $user = $this->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('AcmeUsersBundle:User')
+                ->findUserById($this->getRequest()->get('id'));
+        $form = $this->createForm(new EditType(), $user);
 
         $form->handleRequest($this->getRequest());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $registration = $form->getData();
+            $edit = $form->getData();
 
-            $dm->persist($registration->getUser());
+            $dm->persist($edit->getUser());
             $dm->flush();
 
             return $this->redirectToRoute('acme_users_show');
         }
 
-        return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
+        return $this->render('AcmeUsersBundle:Users:edit.html.twig', array('form' => $form->createView()));
     }
 
 }

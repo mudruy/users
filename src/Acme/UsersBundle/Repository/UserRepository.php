@@ -24,5 +24,18 @@ class UserRepository extends DocumentRepository
             ->execute();
     }
     
+    /**
+     * return user for edit
+     * @param string $id
+     * @return User
+     */
+    public function findUserById($id)
+    {
+        return $this->createQueryBuilder()
+            ->field('id')->equals($id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+    
     
 }

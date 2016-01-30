@@ -1,6 +1,6 @@
 {% extends 'AcmeUsersBundle::index.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Edit{% endblock %}
 {% block content %}
     
     
@@ -8,10 +8,34 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form class="well form-horizontal" action="{{ path('acme_users_edit')}}" method="post" {{ form_enctype(form) }}>
-                {{ form_widget(form) }}
-
-                <input type="submit" class="btn btn-primary" />
+                <form class="well form-horizontal" action="" method="post" {{ form_enctype(form) }}>
+                    <fieldset>
+                        <div class="form-group {% if form.name.vars.valid==false %}has-error{% endif %}">
+                            {{ form_label(form.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                                {{form_widget(form.name)}}
+                                {% if form.name.vars.valid==false %}
+                                    <div class="help-block">
+                                        {{ form_errors(form.name) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group {% if form.password.vars.valid==false %}has-error{% endif %}">
+                            {{ form_label(form.password, 'Password', {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                                {{form_widget(form.password)}}
+                                {% if form.password.vars.valid==false %}
+                                    <div class="help-block">
+                                        {{ form_errors(form.password) }}
+                                    </div>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                        {{ form_rest(form) }}
+                        <input type="submit" class="btn btn-primary" />
+                </fieldset>
                 </form>
             </div>
         </div>
