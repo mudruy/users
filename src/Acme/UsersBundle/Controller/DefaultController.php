@@ -82,6 +82,9 @@ class DefaultController extends Controller {
                 ->getManager()
                 ->getRepository('AcmeUsersBundle:User')
                 ->findUserById($this->getRequest()->get('id'));
+        if(empty($user)){
+            $this->createNotFoundException('The user does not exist');
+        }
         $form = $this->createForm(new EditType(), $user);
 
         $form->handleRequest($this->getRequest());
@@ -91,11 +94,36 @@ class DefaultController extends Controller {
 
             $dm->persist($edit->getUser());
             $dm->flush();
+            
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+        )   ;
 
             return $this->redirectToRoute('acme_users_show');
         }
 
         return $this->render('AcmeUsersBundle:Users:edit.html.twig', array('form' => $form->createView()));
+    }
+    
+    public function deleteAction() {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $user = $this->get('doctrine_mongodb')
+                ->getManager()
+                ->getRepository('AcmeUsersBundle:User')
+                ->findUserById($this->getRequest()->get('id'));
+        if(empty($user)){
+            $this->createNotFoundException('The user does not exist');
+        }
+        $dm->remove($user);
+        $dm->flush();
+        
+        $this->addFlash(
+            'notice',
+            'User deleted!'
+        );
+        return $this->redirectToRoute('acme_users_show');
+
     }
 
 }

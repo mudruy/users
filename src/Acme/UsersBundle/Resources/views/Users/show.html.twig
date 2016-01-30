@@ -10,12 +10,18 @@
             <div class="col-md-6">
                 <a href="{{ path('acme_users_create') }}" class="btn btn-primary">Add</a>
                 <hr />
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                <div class="callout callout-info lead">
+                    {{ flash_message }}
+                </div>
+                {% endfor %}
                 <table class="table table-hover">
                     <tbody>
                     {% for user in users %}
                         <tr>
                             <td><p>{{ user.name }}</p></td>
                             <td style="text-align: right;"><a href="{{ path('acme_users_edit', {'id':user.id}) }}">Edit</a></td>
+                            <td style="text-align: right;"><a onclick="return confirm('Are you sure you want to delete this item?');" href="{{ path('acme_users_delete', {'id':user.id}) }}">Delete</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

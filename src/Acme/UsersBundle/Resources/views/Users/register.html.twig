@@ -8,6 +8,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
+                <p class="login-box-msg">Register</p>
                 <form class="well form-horizontal" action="{{ path('acme_users_create')}}" method="post" {{ form_enctype(form) }}>
                     <fieldset>
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">

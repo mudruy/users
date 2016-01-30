@@ -17,3 +17,7 @@ acme_users_edit:
     path:     /acme/users/edit/{id}
     defaults: { _controller: AcmeUsersBundle:Default:edit }
     methods:  [GET, POST]
+acme_users_delete:
+    path:     /acme/users/delete/{id}
+    defaults: { _controller: AcmeUsersBundle:Default:delete }
+    methods:  [GET]
