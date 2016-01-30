@@ -1,0 +1,20 @@
+{% extends 'AcmeUsersBundle::index.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block content %}
+    
+    
+    <section class="content">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form class="well form-horizontal" action="{{ path('acme_users_edit')}}" method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+
+                <input type="submit" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

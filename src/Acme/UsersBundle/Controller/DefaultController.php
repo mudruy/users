@@ -73,5 +73,27 @@ class DefaultController extends Controller {
                 ->findAllOrderedByName();
         return $this->render('AcmeUsersBundle:Users:show.html.twig', array('users' => $users));
     }
+    
+    public function editAction() {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+
+        $user = new User();
+        $form = $this->createForm(new RegistrationType(), $user);
+        //$form = $this->createForm(new RegistrationType(), new Registration());
+        //but this do not work
+
+        $form->handleRequest($this->getRequest());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registration = $form->getData();
+
+            $dm->persist($registration->getUser());
+            $dm->flush();
+
+            return $this->redirectToRoute('acme_users_show');
+        }
+
+        return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
+    }
 
 }

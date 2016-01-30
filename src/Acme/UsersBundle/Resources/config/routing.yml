@@ -13,3 +13,6 @@ acme_users_create2:
 acme_users_show:
     path:     /acme/users/show
     defaults: { _controller: AcmeUsersBundle:Default:show }
+acme_users_edit:
+    path:     /acme/users/edit
+    defaults: { _controller: AcmeUsersBundle:Default:edit }
