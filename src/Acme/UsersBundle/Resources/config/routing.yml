@@ -21,3 +21,9 @@ acme_users_delete:
     path:     /acme/users/delete/{id}
     defaults: { _controller: AcmeUsersBundle:Default:delete }
     methods:  [GET]
+acme_users_login:
+    path:     /login
+    defaults: { _controller: AcmeUsersBundle:Security:login }
+acme_users_login_check:
+    path:     /login_check
+    defaults: { _controller: AcmeUsersBundle:Security:loginCheck }

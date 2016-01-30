@@ -12,8 +12,7 @@ class EditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class);
-        $builder->add('password', TextType::class);
+        $builder->add('user', new UserType());
     }
 
     public function getName()
