@@ -20,11 +20,19 @@ class IndexController extends Controller {
         return $this->redirectToRoute('acme_users_show');
     }
 
+    /**
+     * show register form
+     * @return Response
+     */
     public function registerAction() {
         $form = $this->createForm(new RegistrationType(), new Registration());
         return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * show create form
+     * @return Response
+     */
     public function createAction() {
 
         $user = new User();
@@ -47,6 +55,10 @@ class IndexController extends Controller {
         return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
     }
 
+    /**
+     * show user list
+     * @return Response
+     */
     public function showAction() {
         $users = $this->get('doctrine_mongodb')
                 ->getManager()
@@ -55,6 +67,10 @@ class IndexController extends Controller {
         return $this->render('AcmeUsersBundle:Users:show.html.twig', array('users' => $users));
     }
     
+    /**
+     * show users
+     * @return Response
+     */
     public function editAction() {
 
         $user = $this->get('doctrine_mongodb')
@@ -87,6 +103,10 @@ class IndexController extends Controller {
         return $this->render('AcmeUsersBundle:Users:edit.html.twig', array('form' => $form->createView()));
     }
     
+    /**
+     * delete users
+     * @return Response
+     */
     public function deleteAction() {
         $user = $this->get('doctrine_mongodb')
                 ->getManager()
