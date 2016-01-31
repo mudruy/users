@@ -1,6 +1,9 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -24,14 +27,12 @@ security:
             anonymous: ~
         secured_area:
             pattern:    ^/
-            form_login: ~
+            form_login:
+                csrf_token_generator: security.csrf.token_manager
             logout:
                 path:   /logout
                 target: /
-        
-        secured_area:
-            form_login:
-                csrf_token_generator: security.csrf.token_manager
+    
         main:
             anonymous: ~
             form_login:
@@ -44,3 +45,8 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    access_control:
+        - { path: ^/acme/users/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER  }
+        
