@@ -1,8 +1,9 @@
 <?php
 
 namespace Acme\UsersBundle\Document;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-class User
+class User implements UserInterface
 {
     
     protected $name;
@@ -45,6 +46,46 @@ class User
     public function getName()
     {
         return $this->name;
+    }
+    
+    public function getRoles()
+    {
+        return array('ROLE_ADMIN');
+    }
+    
+    public function getSalt()
+    {
+        return null;
+    }
+    
+    public function getUsername()
+    {
+        return $this->getName();
+    }
+    
+    public function eraseCredentials()
+    {
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof WebserviceUser) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->salt !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

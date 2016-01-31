@@ -36,7 +36,13 @@ class IndexController extends Controller {
             $registration = $form->getData();
 
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->persist($registration->getUser());
+            
+            $user = $registration->getUser();
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            
+            $dm->persist($user);
             $dm->flush();
             
             $this->addFlash(
@@ -63,9 +69,14 @@ class IndexController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $registration = $form->getData();
+            
+            $user = $registration->getUser();
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
 
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->persist($registration->getUser());
+            $dm->persist($user);
             $dm->flush();
             
             $this->addFlash(
@@ -111,9 +122,14 @@ class IndexController extends Controller {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $edit = $form->getData();
+            
+            $user = $edit->getUser();
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
 
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->persist($edit->getUser());
+            $dm->persist($user);
             $dm->flush();
             
             $this->addFlash(
