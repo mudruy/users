@@ -13,6 +13,8 @@ class RegistrationType extends AbstractType
     {
         $builder->add('user', new UserType());
         $builder->add('terms', 'checkbox', array('property_path' => 'termsAccepted', 'mapped' => false));
+        $user = $builder->get('user');
+        $user->remove('roles');
     }
 
     public function getName()

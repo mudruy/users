@@ -5,6 +5,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
 {
+
+    protected $roles;
     
     protected $name;
 
@@ -50,7 +52,13 @@ class User implements UserInterface
     
     public function getRoles()
     {
-        return array('ROLE_ADMIN');
+        return $this->roles;
+    }
+    
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+        return $this;
     }
     
     public function getSalt()

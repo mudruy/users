@@ -19,6 +19,12 @@ class UserType extends AbstractType
            'second_name' => 'confirm',
            'type' => 'password'
         ));
+        $roles = array("ROLE_ADMIN" => "admin", "ROLE_USER" => "user");
+        $builder->add('roles', 'choice', array(
+            'choices' => $roles,
+            'multiple' => true,
+            'expanded' => true,
+        ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

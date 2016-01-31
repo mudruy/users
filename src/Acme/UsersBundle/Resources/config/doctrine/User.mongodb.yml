@@ -7,10 +7,14 @@ Acme\UsersBundle\Document\User:
             type: string
         password:
             type: string
+        roles:
+            type: collection
     properties:
         name:
             - NotBlank: ~
         password:
+            - NotBlank: ~
+        roles:
             - NotBlank: ~
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name

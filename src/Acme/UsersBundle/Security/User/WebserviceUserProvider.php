@@ -34,7 +34,7 @@ class WebserviceUserProvider  implements UserProviderInterface
 
 
         if ($userData instanceof \Acme\UsersBundle\Document\User) {
-            return new WebserviceUser($username, $userData->getPassword(), '', array('ROLE_ADMIN'));
+            return new WebserviceUser($userData->getUsername(), $userData->getPassword(), '', $userData->getRoles());
         }
 
         throw new UsernameNotFoundException(
