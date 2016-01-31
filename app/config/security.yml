@@ -4,17 +4,10 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory:
-                users:
-                    ryan:
-                        password: ryanpass
-                        roles: 'ROLE_USER'
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
+        webservice:
+            id: app.webservice_user_provider
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Acme\UsersBundle\Security\User\WebserviceUser: plaintext
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -25,13 +18,13 @@ security:
         login_firewall:
             pattern:   ^/login$
             anonymous: ~
-        login_chk_firewall:
-            pattern:   ^/login_check$
-            anonymous: ~
         secured_area:
             pattern:    ^/
             form_login: ~
-        
+            logout:
+                path:   /logout
+                target: /
+
         secured_area:
             form_login:
                 csrf_token_generator: security.csrf.token_manager

@@ -37,11 +37,5 @@ class SecurityController extends Controller
      */
     public function loginCheckAction()
     {
-        return $this->redirectToRoute('acme_users_show');
-//        echo $this->getRequest()->get('_username');
-//        echo $this->getRequest()->get('_password');
-//        die('123');
-        // this controller will not be executed,
-        // as the route is handled by the Security system
     }
 }

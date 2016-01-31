@@ -2,3 +2,6 @@ services:
 #    acme_users.example:
 #        class: Acme\UsersBundle\Example
 #        arguments: ["@service_id", "plain_value", %parameter%]
+    app.webservice_user_provider:
+            class: Acme\UsersBundle\Security\User\WebserviceUserProvider
+            arguments: ["@=service('doctrine_mongodb').getRepository('AcmeUsersBundle:User')"]

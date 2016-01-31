@@ -27,3 +27,5 @@ acme_users_login:
 acme_users_login_check:
     path:     /login_check
     defaults: { _controller: AcmeUsersBundle:Security:loginCheck }
+logout:
+    path: /logout

@@ -37,5 +37,18 @@ class UserRepository extends DocumentRepository
             ->getSingleResult();
     }
     
+    /**
+     * return user for auth
+     * @param string $name
+     * @return User
+     */
+    public function findUserByName($name)
+    {
+        return $this->createQueryBuilder()
+            ->field('name')->equals($name)
+            ->getQuery()
+            ->getSingleResult();
+    }
+    
     
 }
