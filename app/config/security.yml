@@ -18,13 +18,16 @@ security:
         login_firewall:
             pattern:   ^/login$
             anonymous: ~
+        register_firewall:
+            pattern:   ^/acme/users/register$
+            anonymous: ~
         secured_area:
             pattern:    ^/
             form_login: ~
             logout:
                 path:   /logout
                 target: /
-
+        
         secured_area:
             form_login:
                 csrf_token_generator: security.csrf.token_manager

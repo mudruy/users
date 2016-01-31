@@ -25,7 +25,28 @@ class IndexController extends Controller {
      * @return Response
      */
     public function registerAction() {
-        $form = $this->createForm(new RegistrationType(), new Registration());
+        $user = new User();
+        $form = $this->createForm(new RegistrationType(), $user);
+        //$form = $this->createForm(new RegistrationType(), new Registration());
+        //but this do not work
+        
+        $form->handleRequest($this->getRequest());
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $registration = $form->getData();
+
+            $dm = $this->get('doctrine.odm.mongodb.document_manager');
+            $dm->persist($registration->getUser());
+            $dm->flush();
+            
+            $this->addFlash(
+                'notice',
+                'User registered!'
+            );
+
+            return $this->redirectToRoute('acme_users_register');
+        }
+        
         return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
     }
 
@@ -36,9 +57,7 @@ class IndexController extends Controller {
     public function createAction() {
 
         $user = new User();
-        $form = $this->createForm(new RegistrationType(), $user);
-        //$form = $this->createForm(new RegistrationType(), new Registration());
-        //but this do not work
+        $form = $this->createForm(new EditType(), $user);
 
         $form->handleRequest($this->getRequest());
 
@@ -52,7 +71,7 @@ class IndexController extends Controller {
             return $this->redirectToRoute('acme_users_show');
         }
 
-        return $this->render('AcmeUsersBundle:Users:register.html.twig', array('form' => $form->createView()));
+        return $this->render('AcmeUsersBundle:Users:create.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -95,7 +114,7 @@ class IndexController extends Controller {
             $this->addFlash(
                 'notice',
                 'Your changes were saved!'
-        )   ;
+            );
 
             return $this->redirectToRoute('acme_users_show');
         }
