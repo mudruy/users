@@ -10,7 +10,7 @@
             <div class="col-md-3">
             <div class="box box-primary">
                 {% for flash_message in app.session.flashbag.get('notice') %}
-                <div class="alert-success">
+                <div class="callout callout-info lead alert-success">
                     {{ flash_message }}
                 </div>
                 {% endfor %}
@@ -18,7 +18,7 @@
                     <h3 class="box-title">Register</h3>
                 </div>
                 <a href="{{ path('acme_users_login')}}">Login</a>
-                <form class="well" role="form"  action="{{ path('acme_users_register')}}" method="post" {{ form_enctype(form) }}>
+                <form class="well form-horizontal" role="form"  action="{{ path('acme_users_register')}}" method="post" {{ form_enctype(form) }}>
                     <div class="box-body">
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}

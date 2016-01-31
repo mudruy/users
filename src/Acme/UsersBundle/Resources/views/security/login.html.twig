@@ -10,7 +10,7 @@
             <div class="box box-primary">
                 
                 {% if error %}
-                    <div class="alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <div class="callout callout-info lead alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
 
                 <div class="box-header with-border">

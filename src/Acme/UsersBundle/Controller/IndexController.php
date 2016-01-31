@@ -67,6 +67,11 @@ class IndexController extends Controller {
             $dm = $this->get('doctrine.odm.mongodb.document_manager');
             $dm->persist($registration->getUser());
             $dm->flush();
+            
+            $this->addFlash(
+                'notice',
+                'User added!'
+            );
 
             return $this->redirectToRoute('acme_users_show');
         }

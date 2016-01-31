@@ -8,18 +8,21 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
+            <div class="box box-primary">
                 {% for flash_message in app.session.flashbag.get('notice') %}
-                <div class="callout callout-info lead">
+                <div class="callout callout-info lead alert-success">
                     {{ flash_message }}
                 </div>
                 {% endfor %}
-                <p class="login-box-msg">Create user</p>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create user</h3>
+                </div>
                 <form class="well form-horizontal" action="{{ path('acme_users_create')}}" method="post" {{ form_enctype(form) }}>
-                    <fieldset>
+                    <div class="box-body">
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}
                             <div class="controls">
-                                {{form_widget(form.user.name)}}
+                                {{form_widget(form.user.name, { 'attr': {'class': 'form-control'} })}}
                                 {% if form.user.name.vars.valid==false %}
                                     <div class="help-block">
                                         {{ form_errors(form.user.name) }}
@@ -30,14 +33,14 @@
                         <div class="form-group {% if form.user.password.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.password, 'Password', {'label_attr': {'class': 'control-label'}}) }}
                             <div class="controls">
-                                {{form_widget(form.user.password.password)}}
+                                {{form_widget(form.user.password.password, { 'attr': {'class': 'form-control'} })}}
                                 {% if form.user.password.password.vars.valid==false %}
                                     <div class="help-block">
                                         {{ form_errors(form.user.password.password) }}
                                     </div>
                                 {% endif %}
                                 <br />
-                                {{form_widget(form.user.password.confirm)}}
+                                {{form_widget(form.user.password.confirm, { 'attr': {'class': 'form-control'} })}}
                                 {% if form.user.password.confirm.vars.valid==false %}
                                     <div class="help-block">
                                         {{ form_errors(form.user.password.confirm) }}
@@ -47,9 +50,12 @@
                             </div>
                         </div>
                         {{ form_rest(form) }}
+                        </div>
+                        <div class="box-footer">
                         <input type="submit" class="btn btn-primary" />
-                </fieldset>
+                        </div>
                 </form>
+            </div>
             </div>
         </div>
     </section>
