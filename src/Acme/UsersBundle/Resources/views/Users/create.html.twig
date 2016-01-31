@@ -7,7 +7,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 {% for flash_message in app.session.flashbag.get('notice') %}
                 <div class="callout callout-info lead">
                     {{ flash_message }}
