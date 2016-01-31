@@ -22,6 +22,7 @@
                     <div class="box-body">
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_errors(form) }}
                             <div class="controls">
                                 {{form_widget(form.user.name, { 'attr': {'class': 'form-control'} })}}
                                 {% if form.user.name.vars.valid==false %}
