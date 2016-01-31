@@ -1,7 +1,0 @@
-Acme\UsersBundle\Document\Group:
-    repositoryClass: Acme\UsersBundle\Repository\GroupRepository
-    fields:
-        id:
-            id:  true
-        role:
-            type: string

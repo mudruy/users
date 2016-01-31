@@ -5,6 +5,9 @@ Acme\UsersBundle\Document\User:
             id:  true
         name:
             type: string
+            index: true
+            unique: true
+            order: true
         password:
             type: string
         roles:
