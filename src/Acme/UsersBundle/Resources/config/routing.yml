@@ -6,7 +6,7 @@ acme_users_create:
     defaults: { _controller: AcmeUsersBundle:Index:create }
 acme_users_register:
     path:     /acme/users/register
-    defaults: { _controller: AcmeUsersBundle:Index:register }
+    defaults: { _controller: AcmeUsersBundle:Register:register }
 acme_users_show:
     path:     /acme/users/show
     defaults: { _controller: AcmeUsersBundle:Index:show }
