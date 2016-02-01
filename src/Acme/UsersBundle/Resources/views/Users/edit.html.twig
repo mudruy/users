@@ -14,11 +14,11 @@
                 </div>
                 <form class="well form-horizontal" action="" method="post" {{ form_enctype(form) }}>
                     <div class="box-body">
+                        {{ form_errors(form) }}
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}
                             <div class="controls">
                                 {{form_widget(form.user.name, { 'attr': {'class': 'form-control'} })}}
-                                {{ form_errors(form) }}
                                 {% if form.user.name.vars.valid==false %}
                                     <div class="help-block">
                                         {{ form_errors(form.user.name) }}
