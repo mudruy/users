@@ -2,20 +2,20 @@ acme_users_homepage:
     path:     /
     defaults: { _controller: AcmeUsersBundle:Index:index }
 acme_users_create:
-    path:     /acme/users/create
+    path:     /users/create
     defaults: { _controller: AcmeUsersBundle:Index:create }
 acme_users_register:
-    path:     /acme/users/register
+    path:     /users/register
     defaults: { _controller: AcmeUsersBundle:Register:register }
 acme_users_show:
-    path:     /acme/users/show
+    path:     /users/show
     defaults: { _controller: AcmeUsersBundle:Index:show }
 acme_users_edit:
-    path:     /acme/users/edit/{id}
+    path:     /users/edit/{id}
     defaults: { _controller: AcmeUsersBundle:Index:edit }
     methods:  [GET, POST]
 acme_users_delete:
-    path:     /acme/users/delete/{id}
+    path:     /users/delete/{id}
     defaults: { _controller: AcmeUsersBundle:Index:delete }
     methods:  [GET]
 acme_users_login:
