@@ -33,19 +33,13 @@ class IndexController extends Controller {
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->persist($user);
-            $dm->flush();
-            
-            $this->addFlash(
-                'notice',
-                'User added!'
-            );
+            $this->_userOdmAction($user, 'User added!', 'persist');
 
             return $this->redirectToRoute('acme_users_show');
         }
 
-        return $this->render('AcmeUsersBundle:Users:create.html.twig', array('form' => $form->createView()));
+        return $this->render('AcmeUsersBundle:Users:create.html.twig', 
+                array('form' => $form->createView()));
     }
 
     /**
@@ -57,7 +51,8 @@ class IndexController extends Controller {
                 ->getManager()
                 ->getRepository('AcmeUsersBundle:User')
                 ->findAllOrderedByName();
-        return $this->render('AcmeUsersBundle:Users:show.html.twig', array('users' => $users));
+        return $this->render('AcmeUsersBundle:Users:show.html.twig',
+                array('users' => $users));
     }
     
     /**
@@ -86,19 +81,13 @@ class IndexController extends Controller {
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $dm = $this->get('doctrine.odm.mongodb.document_manager');
-            $dm->persist($user);
-            $dm->flush();
-            
-            $this->addFlash(
-                'notice',
-                'Your changes were saved!'
-            );
+            $this->_userOdmAction($user, 'Your changes were saved!', 'persist');
 
             return $this->redirectToRoute('acme_users_show');
         }
 
-        return $this->render('AcmeUsersBundle:Users:edit.html.twig', array('form' => $form->createView()));
+        return $this->render('AcmeUsersBundle:Users:edit.html.twig', 
+                array('form' => $form->createView()));
     }
     
     /**
@@ -113,16 +102,28 @@ class IndexController extends Controller {
         if(empty($user)){
             $this->createNotFoundException('The user does not exist');
         }
-        $dm = $this->get('doctrine.odm.mongodb.document_manager');
-        $dm->remove($user);
-        $dm->flush();
-        
-        $this->addFlash(
-            'notice',
-            'User deleted!'
-        );
+        $this->_userOdmAction($user, 'User deleted!', 'remove');
         return $this->redirectToRoute('acme_users_show');
 
+    }
+    
+    /**
+     * odm action and flash
+     * @param AcmeUsersBundle:User $user
+     * @param string $flash
+     * @param string $action
+     */
+    protected function _userOdmAction($user, $flash = '', $action = 'persist') {
+        $dm = $this->get('doctrine.odm.mongodb.document_manager');
+        $dm->$action($user);
+        $dm->flush();
+        
+        if(!empty($flash)){
+            $this->addFlash(
+                'notice',
+                $flash
+            );
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
 namespace Acme\UsersBundle\Document;
-use Symfony\Component\Security\Core\User\UserInterface;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
@@ -10,33 +10,32 @@ use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 /**
  * @MongoDBUnique(fields="name")
  */
+class User implements UserInterface {
 
-class User implements UserInterface
-{
-
+    /**
+     * @MongoDB\Field(type="collection")
+     * @Assert\NotBlank()
+     */
     protected $roles;
-    
+
     /**
      * @MongoDB\Field(type="string")
      * @Assert\NotBlank()
      */
     protected $name;
-
     protected $password;
-    
+
     /**
      * @var MongoId $id
      */
     protected $id;
-    
-    
+
     /**
      * Get id
      *
      * @return id $id
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -46,8 +45,7 @@ class User implements UserInterface
      * @param string $name
      * @return self
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
         return $this;
     }
@@ -57,38 +55,57 @@ class User implements UserInterface
      *
      * @return string $name
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
-    
-    public function getRoles()
-    {
+
+    /**
+     * get roles
+     * @return array
+     */
+    public function getRoles() {
         return $this->roles;
     }
-    
-    public function setRoles($roles)
-    {
+
+    /**
+     * set roles
+     * @param type $roles
+     * @return self
+     */
+    public function setRoles($roles) {
         $this->roles = $roles;
         return $this;
     }
-    
-    public function getSalt()
-    {
+
+    /**
+     * null for bcrypt
+     * @return null
+     */
+    public function getSalt() {
         return null;
     }
-    
-    public function getUsername()
-    {
+
+    /**
+     * get username for implement auth interface
+     * @return string
+     */
+    public function getUsername() {
         return $this->getName();
     }
-    
-    public function eraseCredentials()
-    {
+
+    /**
+     * implement auth interface
+     */
+    public function eraseCredentials() {
+        
     }
 
-    public function isEqualTo(UserInterface $user)
-    {
+    /**
+     * implement auth interface
+     * @param UserInterface $user
+     * @return boolean
+     */
+    public function isEqualTo(UserInterface $user) {
         if (!$user instanceof WebserviceUser) {
             return false;
         }
@@ -114,8 +131,7 @@ class User implements UserInterface
      * @param string $password
      * @return self
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
         return $this;
     }
@@ -125,21 +141,24 @@ class User implements UserInterface
      *
      * @return string $password
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
-    
-    public function setUser( $user)
-    {
+
+    /**
+     * for form save - not work documentation
+     * @param User $user
+     */
+    public function setUser($user) {
+        
     }
 
-    public function getUser()
-    {
+    /**
+     * for form save - not work documentation
+     * @return self
+     */
+    public function getUser() {
         return $this;
     }
-    
-
-
 
 }

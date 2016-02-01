@@ -45,6 +45,17 @@
                                 
                             </div>
                         </div>
+                        <div class="form-group {% if form.user.roles.vars.valid==false %}has-error{% endif %}">
+                            {{ form_label(form.user.roles, 'Roles', {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                                {{form_widget(form.user.roles)}}
+                                {% if form.user.roles.vars.valid==false %}
+                                    <div class="help-block">
+                                        {{ form_errors(form.user.roles) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                         {{ form_rest(form) }}
                         </div>
                         <div class="box-footer">

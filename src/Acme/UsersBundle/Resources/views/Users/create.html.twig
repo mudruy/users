@@ -18,12 +18,12 @@
                     <h3 class="box-title">Create user</h3>
                 </div>
                 <form class="well form-horizontal" action="{{ path('acme_users_create')}}" method="post" {{ form_enctype(form) }}>
+                    {{ form_errors(form) }}
                     <div class="box-body">
                         <div class="form-group {% if form.user.name.vars.valid==false %}has-error{% endif %}">
                             {{ form_label(form.user.name, 'Username', {'label_attr': {'class': 'control-label'}}) }}
                             <div class="controls">
                                 {{form_widget(form.user.name, { 'attr': {'class': 'form-control'} })}}
-                                {{ form_errors(form) }}
                                 {% if form.user.name.vars.valid==false %}
                                     <div class="help-block">
                                         {{ form_errors(form.user.name) }}
@@ -48,6 +48,17 @@
                                     </div>
                                 {% endif %}
                                 
+                            </div>
+                        </div>
+                        <div class="form-group {% if form.user.roles.vars.valid==false %}has-error{% endif %}">
+                            {{ form_label(form.user.roles, 'Roles', {'label_attr': {'class': 'control-label'}}) }}
+                            <div class="controls">
+                                {{form_widget(form.user.roles)}}
+                                {% if form.user.roles.vars.valid==false %}
+                                    <div class="help-block">
+                                        {{ form_errors(form.user.roles) }}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         {{ form_rest(form) }}
