@@ -17,6 +17,9 @@ php composer.phar update <br />
 app/console cache:clear;php app/console server:run <br />
 посмотреть можно http://localhost:8000/ <br />
 
+Запустить тест можно
+./bin/phpunit -c app/ src/Acme/UsersBundle/Tests/
+
 администаратор пользователей admin:admin <br />
 
 в app/config/security.yml можно управлять уровенем доступа  <br />

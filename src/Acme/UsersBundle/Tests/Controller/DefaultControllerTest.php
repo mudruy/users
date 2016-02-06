@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testLogin()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/login');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains('Sign in to start your session', $client->getResponse()->getContent());
     }
 }
