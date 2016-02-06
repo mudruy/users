@@ -55,9 +55,6 @@ class IndexController extends Controller {
         $page_size = $this->container->getParameter('count_on_page');
         $paginator  = $this->get('knp_paginator');
         $pagination = DoctrineODMHelp::paginate($paginator, $users_query, $page_size, $page);
-        $thisPage = $page;
-        $maxPages = ceil($pagination->count() / $page_size);
-        $routeName = 'acme_users_show';
         return $this->render('AcmeUsersBundle:Users:show.html.twig', 
                 compact('pagination'));
     }
