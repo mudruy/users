@@ -20,8 +20,7 @@ class UserRepository extends DocumentRepository
     {
         return $this->createQueryBuilder()
             ->sort('name', 'ASC')
-            ->getQuery()
-            ->execute();
+            ->getQuery();
     }
     
     /**

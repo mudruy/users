@@ -8,8 +8,8 @@ acme_users_register:
     path:     /users/register
     defaults: { _controller: AcmeUsersBundle:Register:register }
 acme_users_show:
-    path:     /users/show
-    defaults: { _controller: AcmeUsersBundle:Index:show }
+    path:     /users/show/{page}
+    defaults: { _controller: AcmeUsersBundle:Index:show, page: 1 }
 acme_users_edit:
     path:     /users/edit/{id}
     defaults: { _controller: AcmeUsersBundle:Index:edit }

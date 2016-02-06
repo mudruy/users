@@ -7,6 +7,7 @@ use Acme\UsersBundle\Document\User;
 use Acme\UsersBundle\Form\Type\RegistrationType;
 use Acme\UsersBundle\Form\Type\EditType;
 use Acme\UsersBundle\Form\Model\Registration;
+use Acme\UsersBundle\Doctrine\DoctrineODMHelp;
 
 class IndexController extends Controller {
 
@@ -46,13 +47,19 @@ class IndexController extends Controller {
      * show user list
      * @return Response
      */
-    public function showAction() {
-        $users = $this->get('doctrine_mongodb')
+    public function showAction($page) {
+        $users_query = $this->get('doctrine_mongodb')
                 ->getManager()
                 ->getRepository('AcmeUsersBundle:User')
                 ->findAllOrderedByName();
-        return $this->render('AcmeUsersBundle:Users:show.html.twig',
-                array('users' => $users));
+        $page_size = $this->container->getParameter('count_on_page');
+        $paginator  = $this->get('knp_paginator');
+        $pagination = DoctrineODMHelp::paginate($paginator, $users_query, $page_size, $page);
+        $thisPage = $page;
+        $maxPages = ceil($pagination->count() / $page_size);
+        $routeName = 'acme_users_show';
+        return $this->render('AcmeUsersBundle:Users:show.html.twig', 
+                compact('pagination'));
     }
     
     /**

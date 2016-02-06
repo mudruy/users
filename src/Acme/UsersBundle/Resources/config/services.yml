@@ -5,3 +5,5 @@ services:
     app.webservice_user_provider:
             class: Acme\UsersBundle\Security\User\WebserviceUserProvider
             arguments: ["@=service('doctrine_mongodb').getRepository('AcmeUsersBundle:User')"]
+parameters:
+    count_on_page: 10

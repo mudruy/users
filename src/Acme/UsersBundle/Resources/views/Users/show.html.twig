@@ -18,7 +18,7 @@
                 {% endfor %}
                 <table class="table table-hover">
                     <tbody>
-                    {% for user in users %}
+                    {% for user in pagination %}
                         <tr>
                             <td><p>{{ user.name }}</p></td>
                             <td style="text-align: right;"><a href="{{ path('acme_users_edit', {'id':user.id}) }}">Edit</a></td>
@@ -27,6 +27,10 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
                 
             </div>
         </div>
