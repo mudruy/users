@@ -3,7 +3,7 @@ users mongo bundle
 
 Symfony 2.8
 
-git clone https://github.com/mudruy/tracker.git . <br />
+git clone https://github.com/mudruy/users.git . <br />
 wget https://getcomposer.org/download/1.0.0-alpha11/composer.phar <br />
 php composer.phar update <br />
 
